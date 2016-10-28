@@ -1,13 +1,44 @@
 {% extends "base.html" %}{% block mainbody %}
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="icon-bar"></span></button> <a class="navbar-brand" href="#">一个简单版背单词网站</a>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <form class="navbar-form navbar-right">
-            <a id="register" href="register" class="btn btn-default" role="button">注册</a>
-            <a id="login" href="login" class="btn btn-default" role="button">登录</a>
-        </form>
-    </div>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    {% if request.session.username %}
+    <ul class="nav navbar-nav navbar-right">
+        <li class="active">
+            <a>当前登录用户</a>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{request.session.username}}<strong class="caret"></strong></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="info">个人信息</a>
+                </li>
+        </li>
+        <li>
+            <a href="backword">背单词</a>
+        </li>
+        <li>
+            <a href="logout">登出</a>
+        </li>
+        </ul>
+        </li>
+        <li>&nasp;</li>
+    </ul>
+    {% else %}
+    <form class="navbar-form navbar-right">
+        <a id="register" href="register" class="btn btn-default" role="button">注册</a>
+        <a id="login" href="login" class="btn btn-default" role="button">登录</a>&nasp;{% endif %}
+    </form>
+</div>
 </nav>
+<div class="jumbotron">
+    <h1>
+  
+ 你好{% if request.session.username %},{{request.session.username}}{% endif %}！
+</h1>
+    <p>
+        这是一个简单版的背单词的网站，快开始你的背单词之旅吧！
+    </p>
+    <p>
+        <a class="btn btn-primary btn-large" href="backword">开始背单词</a>
+    </p>
+</div>
 {% endblock %}
