@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'django-crontab',
     'backwordweb',
 ]
 
@@ -124,3 +125,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static').replace('\\', '/'), ]
 
 AUTH_USER_MODEL = 'backwordweb.User'
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+CRONJOBS = [
+    ('0 0 * * *', 'backword.backwordweb.cron.cleardayrecitednum'),
+]

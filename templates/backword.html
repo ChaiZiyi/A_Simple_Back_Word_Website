@@ -24,37 +24,68 @@
     </ul>
     {% endif %}
     </nav>
-
     <h1>背单词</h1>
-
     <h3>用户名：{{request.session.username}}
     今日目标：{{daynum}}
-    今日剩余：{{remaining}}</h3>
-    <h1>单词：{{word}}</h1>
-    <h2>释义：{{interpretation}}</h2>
-    <h4>{% for i in examplelist %}{% for j in i %}{{j}}<br>{% endfor %}{% endfor %}</h4>
-    {% if notelist %}
-<table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            用户
-                        </th>
-                        <th>
-                            笔记
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>{% for i in notelist %}
-                    <tr>
-{% for j in i %}                        <td>
-                            {{j}}
-                        </td>
-              {% endfor %}          
-                    </tr>{% endfor %}
-                    
-                </tbody>
-            </table>{% else %}该单词暂无笔记！
-{% endif %}
-    {% endblock %}
 
+{% if isdone %}
+今日已额外完成：{{muchmore}}
+{% else %}
+    今日剩余：{{remaining}}
+{% endif %}
+    </h3>
+    <form role="form" action="backword" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="dayrecitednum" value="{{dayrecitednum}}">
+        <button type="submit" class="btn btn-primary">下一个</button>
+    </form>
+    <hr />
+    <h1 style="color:green">单词：{{word}}</h1>
+    <h2>释义：{{interpretation}}</h2> 单词分类：
+    <label class="checkbox-inline">
+        <input type="checkbox" id="isselectTOEFL" value="CET4" name="wordrange" {% if isCET4 %}checked{% endif %} disabled>四级
+    </label>
+    <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox2" value="CET6" name="wordrange" {% if isCET6 %}checked{% endif %} disabled>六级
+    </label>
+    <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox3" value="IELTS" name="wordrange" {% if isIELTS %}checked{% endif %} disabled>雅思
+    </label>
+    <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox4" value="TOEFL" name="wordrange" {% if isTOEFL %}checked{% endif %} disabled>托福
+    </label>
+    <hr />
+    <h4>{% for i in examplelist %}{% for j in i %}{{j}}<br>{% endfor %}{% endfor %}</h4>
+    <hr />{% if notelist %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="30%">
+                    用户
+                </th>
+                <th>
+                    笔记
+                </th>
+            </tr>
+        </thead>
+        <tbody>{% for i in notelist %}
+            <tr>
+                {% for j in i %}
+                <td>
+                    {{j}}
+                </td>
+                {% endfor %}
+            </tr>{% endfor %}
+        </tbody>
+    </table>{% else %}该单词暂无笔记！ {% endif %}
+    <hr />
+    <form role="form" action="addnote" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="note">添加该单词的笔记：</label>
+            <input type="text" class="form-control" id="note" name="note" placeholder="请输入笔记" maxlength="100">
+        </div>
+        <input type="hidden" name="wordid" value="{{wordid}}">
+        <button type="submit" class="btn btn-success" id="submitbtn" disabled>添加</button>
+    </form>
+    {% endblock %}
