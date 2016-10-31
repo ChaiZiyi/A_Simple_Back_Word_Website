@@ -18,7 +18,11 @@ A simple site to back word built with the Python and Django frameworks.
 
 **10.30更新**
 
-花了点时间把小网站部署到Ubuntu服务器上了，用的是nginx+uwsgi的方式。不过还是有两个小问题，一个是Django的DEBUG模式关不掉，关掉的话nginx就会显示502错误，还有一个昨天说的Django-crontab这个库的问题老是提示找不到，暂时也没能找到解决办法，大概就是这样。
+花了点时间把小网站部署到Ubuntu服务器上了，用的是nginx+uwsgi的方式。不过还是有两个小问题，一个是Django的DEBUG模式关不掉，关掉的话nginx就会显示Request Bad(400)错误，还有一个昨天说的Django-crontab这个库的问题老是提示找不到，暂时也没能找到解决办法，大概就是这样。
+
+**10.31再更新**
+
+昨天说的DEBUG不能设置为False的问题解决了，原来是忘了在setting.py中加ALLOWED_HOSTS了，加上去就OK了，还有找不到Django-crontab是因为我在INSTALLED_APPS里面写成了'django-crontab'，而事实上应该写成'django_crontab'，连接符和下划线怎么差别就这么大呢？定时任务已经加载进去了，具体效果还得过了12点才能看到。另外，还改了一个登录的小bug，之前没有判断用户名是否在数据库就直接get了，所以如果本来没有这个用户名就会抛异常（囧……
 
 ## 主页
 ![](http://i.imgur.com/heIfOrP.png)
