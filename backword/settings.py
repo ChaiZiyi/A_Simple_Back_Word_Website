@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '@oh!7jra&6a9k#0$$$y#g=)c3t-(v6#phvq30q@zd-p3a!y46='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.chaiziyi.com.cn',]
 
 
 # Application definition
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'django-crontab',
+    'django_crontab',
     'backwordweb',
 ]
 
@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -129,5 +129,5 @@ AUTH_USER_MODEL = 'backwordweb.User'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 CRONJOBS = [
-    ('0 0 * * *', 'backword.backwordweb.cron.cleardayrecitednum'),
+    ('0 0 * * *', 'backwordweb.cron.cleardayrecitednum'),
 ]

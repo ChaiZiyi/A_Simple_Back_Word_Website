@@ -33,11 +33,15 @@ def login_view(request):
         username = request.POST['username']
         password = add_password(request.POST['password'])
         # user = authenticate(username=username, password=password)
-        user_obj = User.objects.get(username=username)
-        if user_obj.password==password:
-            iscorrect = True                    # 登录成功
-            request.session['username'] = username
-            return redirect('/')
+        if User.objects.filter(username=username):
+            user_obj = User.objects.get(username=username)
+            if user_obj.password==password:
+                iscorrect = True                    # 登录成功
+                request.session['username'] = username
+                return redirect('/')
+            else:
+                iscorrect = False                   # 登录失败
+                return render(request, 'login.html',locals())
         else:
             iscorrect = False                   # 登录失败
             return render(request, 'login.html',locals())
