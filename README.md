@@ -1,4 +1,4 @@
-# A_Simple_Back_Word_Website
+# A Simple Back Word Website
 A simple site to back word built with the Python and Django frameworks.
 
 在线访问网址：http://word.chaiziyi.com.cn/
