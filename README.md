@@ -1,8 +1,6 @@
 # A Simple Back Word Website
 A simple site to back word built with the Python and Django frameworks.
 
-在线访问网址：http://word.chaiziyi.com.cn/
-
 > 假设你现在想做一个简单的背单词应用，具体提供下面的4项功能：
 
 > 1. 用户可以根据自己的英语水平，例如 四级，六级，雅思，和托福 来设置自己背单词的范围；
